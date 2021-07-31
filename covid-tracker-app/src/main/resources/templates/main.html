@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    	
+    <title> CORONA TRACKER APPLICATION FOR INDIA </title>
+
+	<style>
+         .navbar-brand {
+            color: #FAF0E6;
+            font-size: 170%;
+            font-weight: 500;
+          }
+        
+	        .navbar-custom {
+	 			 height: 60px; 
+			}
+			
+			.city {
+				font-weight: 600;
+				margin : 15pt;
+				color : #483D8B;
+				text-align: left;
+				font-size: 17pt;
+			}
+			
+			.container {
+				padding-bottom: 30px;
+				color :#DC143C;
+			
+			}
+			
+			.myDiv {
+		  			padding-bottom: 5px;
+			   }
+			   .div1 {
+			   		color : #FFFFF0;
+		 			background-color :#9400D3;
+		  			text-align: center;
+		  			height : 55px;
+		  			font-weight: bold;
+		  			font-size: 14pt;
+			   }
+			   
+			.content-table {
+				border-collapse: collapse;
+				border-spacing: 18px;
+				margin: 10px 0;
+				font-size: 1.1em;
+				min-width: 400px;
+				border-radius : 5px 5px 0 0;
+				overflow : hidden;
+				
+			}
+			
+			.content-table thead tr {
+					background-color :#6495ED;
+					color : #ffffff;
+		  			text-align: left;
+		  			font-weight: bold;
+		  			text-transform : uppercase;
+				}
+				
+			.content-table th ,
+			.content-table td {
+				padding: 15px 23px;
+				text-align: center;
+				
+			  }
+			  
+			.content-table tbody tr{
+				border-bottom: 1px solid #dddddd;
+				font-weight: 600;
+			}
+			
+			.content-table tbody tr:last-of-type {
+				border-bottom: 3px solid #6495ED;
+			}
+			
+			tr:nth-child(even) {
+				background-color : #F0FFF0;
+			}
+			
+			a {
+			  color: #F0E68C;
+			  background-color: transparent;
+			  text-decoration: underline;
+			}
+			a:hover {
+	  			color: #ffa500;
+			}
+			
+			.container1 {
+	            width:600;
+	            height:210px;
+	            padding-top:20px;
+	            padding-left:100px;
+	            padding-right:100px;
+	        }
+	        
+	        #st-box {
+	            float:left;
+	            width:250px;
+	            height:150px;
+	            background-color:#ff6600;
+	            border-radius : 15px 15px 15px 15px;
+	            color : white;
+	            font-size: 25px;
+	            font-weight: bold;
+	            text-align: center;
+	            padding-top: 25px;
+	        }
+	        
+	        #nd-box {
+	            float:left;
+	            width:250px;
+	            height:150px;
+	            background-color:#00e699; 
+	            color : white;
+	            border-radius : 15px 15px 15px 15px;
+	            font-size: 25px;
+	            font-weight: bold;
+	            text-align: center;
+	            padding-top: 25px;
+	            margin-left: 18%;
+	        }
+	        
+	        #rd-box {
+	            
+	            float:right;
+	            width:250px;
+	            height:150px;
+	            background-color:#8c1aff;
+	            color : white;
+	            border-radius : 15px 15px 15px 15px;
+	            font-size: 25px;
+	            font-weight: bold;
+	            text-align: center;
+	            padding-top: 25px;
+	        }
+    </style>
+  </head>
+  
+  <body>
+  
+	    <nav class="navbar navbar-custom" style="background-color:#3CB371;">
+	    	<div class="container-fluid">
+	      		<a class="navbar-brand" href="#">	 COVID-19 TRACKER INDIA	</a>
+	    	</div>
+	    </nav>
+	    
+	 
+		 <div class="city">
+		      <p>	<u>	Summary of COVID-19 in INDIA </u>	</p>
+		  </div> 
+	    
+	      <div class="container1">
+	      
+		          <div id="st-box">
+		                <p>  Total cases  <br> </p>
+		                <p  th:text="${summaryData.total}"></p>
+		            </div>
+		              
+		            <div id="nd-box">
+		                <p>  Active Cases <br> </p>
+		                <p th:text="${summaryData.total-summaryData.discharged-summaryData.deaths}"></p>
+		            </div>
+		              
+		            <div id="rd-box">
+		                <p>  Dead  <br>  </p>
+		                <p th:text="${summaryData.deaths}"></p>
+		            </div> 
+	       </div>
+	  
+	  
+	      <div class="city">
+	      	<p> This Application provides recent status of COVID-19 in Indian states </p>
+	      </div>
+	    
+	      <div class="container">
+	    		<table class= "content-table">
+	    		
+	    			<thead>
+		    			<tr>
+						      <th>S.NO</th>
+						      <th>State / UT</th>
+						      <th>Confirmed Cases</th>
+						      <th>Active Cases</th>
+						      <th>Discharged</th>
+						      <th>Dead</th>
+		    			</tr>
+		    		</thead>
+		    		
+	    				<tbody>
+						    <tr th:each="stateData: ${allData}">
+						      <td th:text="${stateData.id}"></td>
+						      <td th:text="${stateData.loc}"></td>
+						      <td th:text="${stateData.totalConfirmed}"></td>
+						      <td th:text="${stateData.active}"></td>
+						      <td th:text="${stateData.discharged}"></td>
+						      <td th:text="${stateData.deaths}"></td>
+						    </tr>
+		    			</tbody>
+		    			
+				</table>
+			</div>
+	
+		<div class= "myDiv">
+	  		<p class = "div1"> <span th:text="'Last Updated on : ' + ${newDate} + '   at  ' + ${newTime} "> </span> <br>
+	   		Resource : <a href="https://api.rootnet.in/"> api.rootnet.in </a> </p>
+		</div>   
+		 
+  </body>
+  
+</html>
