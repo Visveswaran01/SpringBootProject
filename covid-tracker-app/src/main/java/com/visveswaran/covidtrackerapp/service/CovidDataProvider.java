@@ -22,7 +22,7 @@ public class CovidDataProvider {
 	//Api which provides Data
 	private String url = "https://api.rootnet.in/covid19-in/stats/latest";
 	
-	//This method extracts and stores result in convenient format (DB)
+	//This method extracts and stores result in convenient format
 	private DataExtractor fetchData() throws JsonMappingException, JsonProcessingException 
 	{
 		String jsonStr = restTemplate.getForObject(url,String.class);
@@ -47,7 +47,7 @@ public class CovidDataProvider {
 		return result;
 	}
 	
-	//This method extract and returns the lasted data of given parameter (state)
+	//This method extract and returns the latest data of given parameter (state)
 	public Regional findState(String state) throws JsonMappingException, JsonProcessingException  {
 		List<Regional> allData;
 		Regional res = null;
